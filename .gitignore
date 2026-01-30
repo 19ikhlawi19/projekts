@@ -1,0 +1,97 @@
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+env/
+
+# ========== KI-Handels-Framework / Trading ==========
+calc.csv
+downloads/
+KI-Handels-Framework/*F.csv
+KI-Handels-Framework/*_with_rsi.csv
+KI-Handels-Framework/rsi_grid_results.csv
+*.pth
+*.pt
+*.joblib
+*.scaler
+checkpoints/
+results/
+metrics/
+logs/
+outputs_online/
+Models/
+Plots/
+runs/
+
+# ========== Java ==========
+*.class
+out/
+build/
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+bin/
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+# ========== Kotlin / Gradle ==========
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+/public/
+
+# ========== Eclipse / Xtext / Cinco ==========
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+
+# ========== Secrets / lokale Konfiguration (niemals committen) ==========
+.env
+.env.*
+!.env.example
+*.env.local
+config.local.*
+secrets.*
+**/local.properties
+**/credentials.*
+
+# ========== IDE (allgemein) ==========
+.vscode/
+*.code-workspace
+
+# ========== BA-Handschrifterkennung (optional, wenn groß) ==========
+# Dataset-Ordner nicht committen, wenn sehr groß:
+# data/
+# Dataset/
