@@ -1,0 +1,30 @@
+# Einstiegspunkt Training: leitet an transformer_model_training weiter (Kompatibilität)
+from transformer_model_training import main
+import argparse
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Train Transformer model for IAM Handwriting Recognition")
+    # Paths & Names
+    parser.add_argument('--model_name', type=str, required=True, help="Base name for saving the model and logs")
+    parser.add_argument('--batch_size', type=int, default=32)
+    parser.add_argument('--num_workers', type=int, default=4)
+    parser.add_argument('--feature_dim', type=int, default=20)
+    parser.add_argument('--embed_dim', type=int, default=256)
+    parser.add_argument('--num_heads', type=int, default=8)
+    parser.add_argument('--ffn_dim', type=int, default=1024)
+    parser.add_argument('--encoder_layers', type=int, default=4)
+    parser.add_argument('--decoder_layers', type=int, default=2)
+    parser.add_argument('--target_maxlen', type=int, default=100)
+    parser.add_argument('--dropout', type=float, default=0.1)
+    parser.add_argument('--epochs', type=int, default=100)
+    parser.add_argument('--learning_rate', type=float, default=5e-4)
+    parser.add_argument('--weight_decay', type=float, default=1e-5)
+    parser.add_argument('--warmup_epochs', type=int, default=5)
+    parser.add_argument('--decay_epochs', type=int, default=95)
+    parser.add_argument('--warmup_init_lr', type=float, default=1e-6)
+    parser.add_argument('--final_lr', type=float, default=1e-6)
+    parser.add_argument('--patience', type=int, default=15)
+    parser.add_argument('--min_delta', type=float, default=1e-4)
+    parser.add_argument('--seed', type=int, default=42)
+    args = parser.parse_args()
+    main(args)

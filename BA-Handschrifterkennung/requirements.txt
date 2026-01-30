@@ -1,0 +1,26 @@
+# BA-Handschrifterkennung – Offline & Online (Python 3.8+)
+# Install: pip install -r requirements.txt
+
+# Core
+torch>=1.9.0
+torchvision>=0.10.0
+numpy>=1.20.0
+pandas>=1.3.0
+opencv-python>=4.5.0
+scikit-learn>=1.0.0
+tqdm>=4.60.0
+
+# Metriken & Evaluation
+nltk>=3.6.0
+editdistance>=0.6.0
+
+# Optional: Denoise (offline)
+scikit-image>=0.18.0
+
+# Online-Model: zusätzlich
+openpyxl>=3.0.0
+scipy>=1.7.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+Levenshtein>=0.12.0
+tensorboard>=2.6.0
