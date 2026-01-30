@@ -32,13 +32,14 @@ on:
 
 ### 2. CableCar: Secret für SoPra-Maven
 
-CableCar braucht Abhängigkeiten vom SoPra-GitLab. Dafür:
+CableCar braucht Abhängigkeiten vom SoPra-GitLab (ntf). Der Job **CableCar** läuft nur, wenn das Secret `SOPRA_GITLAB_TOKEN` gesetzt ist (`if: secrets.SOPRA_GITLAB_TOKEN != ''`). Ohne Secret wird der Job übersprungen (kein Fehler).
+
+So setzt du das Secret:
 
 1. **GitHub Repo** → **Settings** → **Secrets and variables** → **Actions**
 2. **New repository secret:** Name `SOPRA_GITLAB_TOKEN`, Wert = dein GitLab Private Token
-3. Der Workflow setzt `SOPRA_GITLAB_TOKEN` als Umgebungsvariable; ohne Secret schlägt der CableCar-Build ggf. fehl.
 
-**Alternative:** Den Job `cablecar` in `ci-kotlin.yml` auskommentieren oder mit `if: false` deaktivieren, wenn du den Token nicht in GitHub hinterlegen willst.
+**Gradlew unter Windows:** Die Workflows konvertieren `gradlew` vor dem Build von CRLF auf LF (`sed -i 's/\r$//'`), damit der Build unter Linux nicht mit „bad interpreter“ fehlschlägt.
 
 ### 3. Java-Version (Auftragsverwaltung / Kotlin)
 

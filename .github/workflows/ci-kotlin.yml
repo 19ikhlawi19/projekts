@@ -31,6 +31,9 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Fix gradlew line endings (CRLF → LF)
+        run: sed -i 's/\r$//' SchimmenSpiel/gradlew
+
       - name: Grant execute permission for gradlew
         run: chmod +x SchimmenSpiel/gradlew
 
@@ -40,7 +43,8 @@ jobs:
   cablecar:
     name: CableCar
     runs-on: ubuntu-latest
-    # CableCar braucht SoPra-Maven (optional): Secret SOPRA_GITLAB_TOKEN in Repo setzen
+    # Nur ausführen, wenn Secret gesetzt ist (CableCar braucht SoPra-Maven für ntf)
+    if: ${{ secrets.SOPRA_GITLAB_TOKEN != '' }}
     env:
       SOPRA_GITLAB_TOKEN: ${{ secrets.SOPRA_GITLAB_TOKEN }}
     steps:
@@ -53,10 +57,11 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Fix gradlew line endings (CRLF → LF)
+        run: sed -i 's/\r$//' CableCar/gradlew
+
       - name: Grant execute permission for gradlew
         run: chmod +x CableCar/gradlew
 
       - name: Build
         run: cd CableCar && ./gradlew build --no-daemon
-        # Wenn kein Token gesetzt ist, schlägt der Build ggf. fehl (ntf nicht auflösbar).
-        # Dann in GitHub: Settings → Secrets → SOPRA_GITLAB_TOKEN anlegen (oder Job deaktivieren).
