@@ -3,6 +3,13 @@
 out/
 build/
 
+# Maven
+target/
+effective.xml
+effective-pom.xml
+dependency-reduced-pom.xml
+*.lst
+
 # IntelliJ IDEA
 .idea/
 *.iml

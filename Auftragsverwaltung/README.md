@@ -33,6 +33,7 @@ Eine Java-Swing-Anwendung zur Verwaltung von Bauaufträgen und Mitarbeitern. Das
 ```
 Auftragsverwaltung/
 ├── Auftragsverwaltung/
+│   ├── pom.xml                      # Maven-Build (Java 11, JUnit 5)
 │   ├── src/
 │   │   ├── Bauauftrag.java          # Datenmodell Bauauftrag
 │   │   ├── BauauftragModel.java     # Tabellenmodell für Aufträge
@@ -41,15 +42,19 @@ Auftragsverwaltung/
 │   │   ├── MitarbeiterModel.java    # Tabellenmodell für Mitarbeiter
 │   │   ├── MitarbeiterTableMenu.java# Kontextmenü Mitarbeitertabelle
 │   │   ├── Hauptfenster.java        # Hauptfenster, Tabs, Menü, Einstieg main()
-│   │   ├── BildRenderer.java       # Zellen-Renderer für Mitarbeiterbilder
+│   │   ├── BildRenderer.java        # Zellen-Renderer für Mitarbeiterbilder
 │   │   ├── CheckboxRenderer.java    # Renderer für Auftragsauswahl-Liste
 │   │   ├── Hauptfenster.form        # IntelliJ UI-Designer-Form
+│   │   ├── test/java/               # Unit-Tests (JUnit 5)
+│   │   │   ├── BauauftragTest.java, BauauftragModelTest.java
+│   │   │   ├── MitarbeiterTest.java, MitarbeiterModelTest.java
+│   │   │   └── ExcelHandler/        # ExcelWerkzeugTest, ZipDateiHelferTest
 │   │   └── ExcelHandler/
 │   │       ├── ExcelLeser.java      # Lesen von .xlsx (XML-basiert)
-│   │       ├── ExcelSchreiber.java   # Schreiben von .xlsx
-│   │       ├── ExcelWerkzeug.java    # Hilfsmethoden (Spalten, Typen)
-│   │       ├── ZipDateiHelfer.java   # ZIP-Verarbeitung für XLSX
-│   │       └── excel_vorlage.zip     # Vorlage für neue Excel-Dateien
+│   │       ├── ExcelSchreiber.java  # Schreiben von .xlsx
+│   │       ├── ExcelWerkzeug.java   # Hilfsmethoden (Spalten, Typen)
+│   │       ├── ZipDateiHelfer.java # ZIP-Verarbeitung für XLSX
+│   │       └── excel_vorlage.zip    # Vorlage für neue Excel-Dateien
 │   └── UML.jpg                      # Klassendiagramm (Bauauftrag, Mitarbeiter)
 ├── README.md
 └── .gitignore
@@ -90,31 +95,35 @@ Die Zuordnung Mitarbeiter ↔ Aufträge erfolgt über die IDs in `auftraege` (z.
 ## Voraussetzungen
 
 - **Java:** JDK 11 oder höher (getestet mit JDK 17).
-- **IDE (optional):** IntelliJ IDEA oder eine andere Java-IDE; das Projekt nutzt IntelliJ-Module (`.iml`) und UI Designer (`.form`).
+- **Maven:** 3.6+ (für Build und Tests).
+- **IDE (optional):** IntelliJ IDEA oder eine andere Java-IDE; das Projekt nutzt IntelliJ UI Designer (`.form`).
 
-Es werden keine externen Bibliotheken benötigt; Excel wird über direkte Verarbeitung der XLSX-XML-Struktur (ZIP) gelesen und geschrieben.
+Für die Anwendung werden keine externen Bibliotheken benötigt; Excel wird über direkte Verarbeitung der XLSX-XML-Struktur (ZIP) gelesen und geschrieben. Für die Unit-Tests wird JUnit 5 (über Maven) verwendet.
 
 ---
 
 ## Build & Ausführung
 
+### Mit Maven (empfohlen)
+
+```bash
+cd Auftragsverwaltung
+mvn compile
+java -cp target/classes Hauptfenster
+```
+
+**Tests ausführen:**
+
+```bash
+cd Auftragsverwaltung
+mvn test
+```
+
 ### Mit IDE (IntelliJ IDEA)
 
 1. Projekt öffnen: `File` → `Open` → Ordner `Auftragsverwaltung` (oder das übergeordnete Verzeichnis) wählen.
-2. JDK einstellen: Projekt Structure → Project SDK (z. B. 11 oder 17).
+2. Als Maven-Projekt erkennen lassen (falls nicht automatisch); JDK 11+ einstellen.
 3. Hauptklasse ausführen: In `Hauptfenster.java` die Methode `main(String[] args)` ausführen (grüner Pfeil oder Rechtsklick → Run).
-
-### Kommandozeile
-
-Quellcode liegt unter `Auftragsverwaltung/src`. Von dort aus (oder mit passendem `-sourcepath`):
-
-```bash
-cd Auftragsverwaltung/src
-javac -encoding UTF-8 Hauptfenster.java
-java Hauptfenster
-```
-
-Falls das Modul von einem übergeordneten Verzeichnis aus gebaut wird, den Pfad zu `src` und ggf. zu `ExcelHandler` anpassen. Die Klasse `Hauptfenster` liegt im Default-Package; das Paket `ExcelHandler` muss relativ zu `src` erreichbar sein.
 
 ---
 
